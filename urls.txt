@@ -37,3 +37,21 @@ https://webbook.nist.gov/cgi/fluid.cgi?Action=Data
  &WUnit=m%2Fs
  &VisUnit=uPa*s
  &STUnit=N%2Fm
+
+# Pressure Increments
+
+https://webbook.nist.gov/cgi/fluid.cgi?Action=Data
+ &ID=C74840
+ &Type=SatT
+ &Digits=5
+ &PLow=0
+ &PHigh=40
+ &PInc=
+ &RefState=DEF
+ &TUnit=K
+ &PUnit=bar
+ &DUnit=g%2Fml
+ &HUnit=kJ%2Fkg
+ &WUnit=m%2Fs
+ &VisUnit=uPa*s
+ &STUnit=N%2Fm
