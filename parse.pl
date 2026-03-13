@@ -15,11 +15,11 @@ my $sl = $isotherm(-1, :); # T=298K, p=40 bar, S=?
 my $target_S = $sl->at(0, 1);
 print "S=$target_S\n";
 
-
-#my $sat_p = rcsv2D('satp.txt', [0, 1, 6], {sep_char => "\t"});
-#print $sat_p;
-
-#my $satT = rcsv2D('satT.txt', [0, 1, 6, 13], {header => 1, sep_char => "\t"});
-#print $satT;
 my $satT = rcols('satT.txt', [0, 1, 6], {INCLUDE => qr/\tvapor$/, COLSEP => "\t"});
-print $satT(:, 2);
+my $idx = vsearch($target_S, $satT(:, 2), { mode => 'insert_leftmost' });
+#print $satT($idx, :)->flat, "\n";
+my ($T_sat, $p_sat, $S_sat) = $satT($idx, :)->list;
+print "$T_sat $p_sat $S_sat\n";
+my ($T_sat, $p_sat, $S_sat) = $satT($idx + 1, :)->list;
+print "$T_sat $p_sat $S_sat\n";
+
