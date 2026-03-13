@@ -2,6 +2,7 @@
 
 use PDL;
 use PDL::IO::CSV ':all';
+use PDL::NiceSlice;
 
 use strict;
 use warnings;
@@ -10,10 +11,9 @@ use warnings;
 # my $pdl = rcsv2D($csv_filename_or_filehandle, \@column_ids);
 
 my $isotherm = rcsv2D('isotherm.txt', [1, 6], {sep_char => "\t"});
-my $sl = $isotherm->slice('-1,:'); # T=298K, p=40 bar, S=?
+my $sl = $isotherm(-1, :); # T=298K, p=40 bar, S=?
 print $sl;
-#my ($p, $S) = $isotherm->slice('-1, :');
-my $S = $sl->index2d(0, 1);
+my $S = $sl->at(0, 1);
 print "S=$S\n";
 
 
