@@ -17,9 +17,10 @@ print "S=$target_S\n";
 
 my $satT = rcols('satT.txt', [0, 1, 6], {INCLUDE => qr/\tvapor$/, COLSEP => "\t"});
 my $idx = vsearch($target_S, $satT(:, 2), { mode => 'insert_leftmost' });
-#print $satT($idx, :)->flat, "\n";
+my ($S1, $S2) = $satT($idx : $idx + 1, 2)->list;
+if (abs($S2 - $target_S) < abs($S1 - $target_S)) {
+    $idx += 1;
+}
 my ($T_sat, $p_sat, $S_sat) = $satT($idx, :)->list;
-print "$T_sat $p_sat $S_sat\n";
-my ($T_sat, $p_sat, $S_sat) = $satT($idx + 1, :)->list;
 print "$T_sat $p_sat $S_sat\n";
 
